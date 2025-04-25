@@ -41,7 +41,7 @@ Imagine you're walking down a row of buildings (or elements):
 
 ## 🧠 **BONUS RHYME (To Remember):**
 
-```css
+
 Scan from left to find smaller near,
 If none exists, mark as -1 here.
 Push the building, then move ahead,
