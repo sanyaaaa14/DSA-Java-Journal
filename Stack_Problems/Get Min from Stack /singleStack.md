@@ -3,7 +3,7 @@
 🧠 Intuition  
 The aim is to design a stack that supports `push`, `pop`, `peek`, and `getMin` in constant time — **using only a single stack**.  
 Instead of maintaining a separate stack for the minimums, we **encode both the element and the minimum at that stage** into a single integer using the formula:  
-encoded_value = element * RANGE + current_min
+encoded_value = element * RANGE + current_min.
 This reduces space usage but only works within a **bounded range** of values.
 
 ⚙️ Approach  
