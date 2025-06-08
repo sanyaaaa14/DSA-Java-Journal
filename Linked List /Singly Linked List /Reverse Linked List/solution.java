@@ -8,15 +8,8 @@ public class ReverseLinkedList {
         ListNode next;
 
         ListNode() {}
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
+        ListNode(int val) { this.val = val; }
+        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
     }
 
     // Approach 1: Using ArrayList
@@ -24,13 +17,13 @@ public class ReverseLinkedList {
         ArrayList<Integer> values = new ArrayList<>();
         ListNode temp = head;
 
-        // Store values in array list
+        // Store values
         while (temp != null) {
             values.add(temp.val);
             temp = temp.next;
         }
 
-        // Overwrite values in reverse order
+        // Overwrite in reverse
         temp = head;
         int i = values.size() - 1;
         while (temp != null) {
@@ -42,23 +35,34 @@ public class ReverseLinkedList {
         return head;
     }
 
-    // Approach 2: In-place reversal
+    // Approach 2: In-place Iterative
     public static ListNode reverseInPlace(ListNode head) {
-        ListNode prev = null;
-        ListNode curr = head;
-        ListNode next = null;
+        ListNode prev = null, curr = head, next = null;
 
         while (curr != null) {
-            next = curr.next;    // Save next node
-            curr.next = prev;    // Reverse pointer
-            prev = curr;         // Move prev forward
-            curr = next;         // Move curr forward
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
         }
 
-        return prev; // New head
+        return prev;
     }
 
-    // Optional: Helper to print the list
+    // Approach 3: Recursive
+    public static ListNode reverseRecursive(ListNode curr, ListNode prev) {
+        if (curr == null) return prev;
+        ListNode next = curr.next;
+        curr.next = prev;
+        return reverseRecursive(next, curr);
+    }
+
+    // Helper for recursion (only passing head)
+    public static ListNode reverseRecursive(ListNode head) {
+        return reverseRecursive(head, null);
+    }
+
+    // Print list
     public static void printList(ListNode head) {
         while (head != null) {
             System.out.print(head.val + " -> ");
@@ -67,9 +71,9 @@ public class ReverseLinkedList {
         System.out.println("null");
     }
 
-    // Test both approaches
+    // Main method for testing
     public static void main(String[] args) {
-        // Sample linked list: 1 -> 2 -> 3 -> null
+        // Create list: 1 -> 2 -> 3 -> null
         ListNode node3 = new ListNode(3);
         ListNode node2 = new ListNode(2, node3);
         ListNode node1 = new ListNode(1, node2);
@@ -77,15 +81,19 @@ public class ReverseLinkedList {
         System.out.println("Original List:");
         printList(node1);
 
-        // Use in-place reversal
-        ListNode reversed = reverseInPlace(node1);
-        System.out.println("Reversed List (In-place):");
-        printList(reversed);
+        // In-place reversal
+        ListNode inPlace = reverseInPlace(node1);
+        System.out.println("In-place Reversed:");
+        printList(inPlace);
 
-        // Re-reverse for testing ArrayList method
-        ListNode restored = reverseInPlace(reversed);
-        System.out.println("Reversed using ArrayList:");
+        // Restore for testing ArrayList
+        ListNode restored = reverseInPlace(inPlace);
+        System.out.println("ArrayList Reversed:");
         printList(reverseUsingArrayList(restored));
+
+        // Restore again for recursive
+        restored = reverseInPlace(restored);
+        System.out.println("Recursive Reversed:");
+        printList(reverseRecursive(restored));
     }
 }
-
