@@ -41,54 +41,57 @@ This approach makes **two passes** over the original list:
 
 ## 💡 Example
 
-**Original List:**
-Original Linked List:
-1 -> 2 -> 3  
-|    |    |  
-v    v    v  
-3    1    2
 
-**Copied List (After Cloning):**
-Copied Linked List Structure:
-
-1 -> 2 -> 3  
-|    |    |  
-v    v    v  
-3    1    2
+### 🔍 Interpretation:
+- `1` → next → `2`, random → `3`
+- `2` → next → `3`, random → `1`
+- `3` → next → `null`, random → `2`
 
 ---
 
-## ⏱️ Time Complexity
+## 💡 Approach: Brute Force Using Extra Traversal
 
-- **First pass**: O(N)
-- **Second pass**: For each node, we do a linear `find()` → O(N) * O(N) = **O(N²)**
+This approach works in two passes:
 
-❗ This is not efficient for large lists.
+### ✅ Step 1: Clone Next Pointers
+- Traverse the original list and clone the nodes with the same data.
+- Link them using only the `next` pointers.
+- This creates a shallow copy of the list.
 
----
-
-## 🧠 Space Complexity
-
-- O(1) extra space (no hash maps or external data structures used).
-- Final cloned list is considered output, not auxiliary space.
-
----
-
-## ⚖️ Trade-offs
-
-✅ Simpler to implement  
-❌ Very inefficient for large inputs  
-❌ Repeated traversals slow down performance
+### ✅ Step 2: Assign Random Pointers
+- For every node in the original list, find the node it points to via `random`.
+- Use a helper method `find()` to get the corresponding node in the cloned list.
+- This requires an O(n) traversal for each node → making the total O(n²).
 
 ---
 
-## 🧪 Can It Be Improved?
+## 📎 Helper Function – `find()`
 
-Yes!  
-Optimized solutions exist using **HashMaps** (to map original → clone) or an **interleaving technique** (inserting clone nodes in between original ones), both of which work in **O(N) time and space**.
+The `find(original, copy, target)` function:
+- Traverses the original list to locate `target`.
+- Simultaneously traverses the copy list.
+- When the node in the original list matches `target`, it returns the corresponding node in the copy list.
 
 ---
 
-## 🏁 Conclusion
+## ⏱️ Time and Space Complexity
 
-This brute-force approach works for small inputs and provides a clear conceptual foundation. But for interviews or production systems, use more optimized methods that avoid nested traversals.
+| Resource            | Complexity         |
+|---------------------|--------------------|
+| Time Complexity     | O(n²) – due to nested traversal in `find()` |
+| Space Complexity    | O(1) – No additional data structures used |
+
+---
+
+## ❌ Limitations
+
+- **Very inefficient for large lists** due to repeated traversal.
+- **Better Alternatives**:
+  - Use a `HashMap<Node, Node>` to store mapping from original → clone.
+  - Use the interleaving node technique for O(1) space and O(n) time.
+
+---
+
+## ✅ Summary
+
+While simple to understand, this brute force solution is not optimal. It is useful for learning and smaller inputs but not recommended for performance-critical applications.
