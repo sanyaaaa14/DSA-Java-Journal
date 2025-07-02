@@ -55,11 +55,11 @@ Input:
 ---
 
 ### ✅ Sorted Output:
-```java
+
 [11, 12, 22, 25, 64]
 
-```java
-int[] arr = {64, 25, 12, 22, 11};
+
+
 ## ⏱️ Complexity
 
 | Resource | Complexity |
