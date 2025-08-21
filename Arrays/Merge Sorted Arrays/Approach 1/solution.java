@@ -1,10 +1,7 @@
 class Solution {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         // Create a copy of the first m elements of nums1
-        int[] nums1copy = new int[m];
-        for (int i = 0; i < m; i++) {
-            nums1copy[i] = nums1[i];
-        }
+        int[] nums1copy = Arrays.copyOf(nums1, m); 
 
         // Initialize three pointers
         int p1 = 0; // pointer for nums1copy
