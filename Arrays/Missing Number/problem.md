@@ -12,10 +12,12 @@ However, this approach requires sorting, which takes **O(n log n)** time.
 ---
 
 ## Intuition 2 (Optimal Using Sum Formula)
-A more efficient solution comes from the observation that the sum of numbers from `0` to `n` can be directly calculated using the formula:  
-\[
+A more efficient solution comes from the observation that the sum of numbers from 0 to n can be directly calculated using the formula:  
+
+$$
 \text{totalSum} = \frac{n \times (n+1)}{2}
-\]  
+$$
+
 
 The missing number is simply the difference between the `totalSum` and the sum of the elements present in the array.
 
